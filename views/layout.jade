@@ -3,5 +3,18 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    #banner
+      #navbar 
+        a(href="birthdays").navlink Birthdays
+        a(href="arcade").navlink Arcade
+        a(href="events").navlink Events
+        a(href="leagues").navlink Leagues
+        a(href="faq").navlink FAQ
+      #header
+        a(href="/").title Acton Bowladrome & Arcade
+        p.undertitle Come Play With Us!
   body
-    block content
+    #content
+      block content
+    #footer
+      p website designed by phil
