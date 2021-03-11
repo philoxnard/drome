@@ -1,23 +1,25 @@
 var express = require('express');
+var bcrypt = require('bcryptjs')
 var router = express.Router();
 var mongoose = require('mongoose')
 var User = require('../schema/UserSchema.js')
 
 /* GET sign up page. */
 router.get('/', function(req, res, next) {
-  res.render('sign-up-form', { title: 'Home' });
+  res.render('sign-up-form', { title: 'Sign Up' });
 });
 
 router.post('/', function(req, res, next){
-  console.log("found")
+  bcrypt.hash("somePassword", 10, (err, hashedPassword) =>{
     const user = new User({
       username: req.body.username, 
-      password: req.body.password
+      password: hashedPassword
     }).save(err => {
       if (err) {
         return next(err)
       }
     })
+  })
   res.redirect('/')
 })
 

@@ -6,6 +6,7 @@ var logger = require('morgan');
 var session = require("express-session")
 var passport = require("passport")
 var LocalStrategy = require("passport-local").Strategy
+var bcrypt = require('bcryptjs')
 var mongoose = require('mongoose')
 var User = require('./schema/UserSchema.js')
 
@@ -47,10 +48,13 @@ passport.use(
       if (!user) {
         return done(null, false, {message: "Username not found"})
       }
-      if (user.password !== password) {
-        return done(null, false, {message: "Incorrect password"})
-      }
-      return done(null, user)
+      bcrypt.compare("somePassword", user.password, (err, res) => {
+        if (res) {
+          return done(null, user)
+        } else {
+          return done(null, false, {message: "incorrect password"})
+        }
+      })
     })
   })
 )
@@ -68,8 +72,8 @@ passport.deserializeUser(function(id, done) {
 app.post(
   "/log-in",
   passport.authenticate("local", {
-    successRedirect: "/birthdays",
-    failureRedirect: "/arcade"
+    successRedirect: "/",
+    failureRedirect: "/"
   })
 )
 
