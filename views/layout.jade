@@ -4,6 +4,13 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     #banner
+      #login
+        if !currentUser
+          a(href="sign-up") Click here to sign up
+          br
+          a(href="log-in") Click here to log in
+        if currentUser
+          a(href="log-out") Click here to log out
       #navbar 
         a(href="birthdays").navlink Birthdays
         a(href="arcade").navlink Arcade

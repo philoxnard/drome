@@ -1,0 +1,9 @@
+extends layout 
+
+block content
+    form(action="", method="POST")
+        label.username Username: 
+        input(type="text", name="username", placeholder="Input your username")
+        label.username Password:
+        input(type="password", name="password", placeholder="Input your password")
+        input(type="submit", value="Log In")

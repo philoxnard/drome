@@ -3,9 +3,24 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require("express-session")
+var passport = require("passport")
+var LocalStrategy = require("passport-local").Strategy
+var mongoose = require('mongoose')
+var User = require('./schema/UserSchema.js')
+
+
+// connect to mongoDb
+const mongoDb = 'mongodb+srv://phil:heck9876@cluster0.z1gnj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+mongoose.connect(mongoDb, {useUnifiedTopology: true, useNewUrlParser: true})
+const db = mongoose.connection
+db.on("error", console.error.bind(console, "mongo connection error:"))
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var signUpRouter = require('./routes/sign-up');
+var logInRouter = require('./routes/log-in')
+var logOutRouter = require('./routes/log-out')
 
 var app = express();
 
@@ -18,9 +33,58 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true}))
+app.use(passport.initialize())
+app.use(passport.session())
 
+// set up passport authentication
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({username: username}, (err, user) => {
+      if (err) {
+        return done(err)
+      }
+      if (!user) {
+        return done(null, false, {message: "Username not found"})
+      }
+      if (user.password !== password) {
+        return done(null, false, {message: "Incorrect password"})
+      }
+      return done(null, user)
+    })
+  })
+)
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id)
+})
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user){
+    done(err, user)
+  })
+})
+
+app.post(
+  "/log-in",
+  passport.authenticate("local", {
+    successRedirect: "/birthdays",
+    failureRedirect: "/arcade"
+  })
+)
+
+// set local object currentUser
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user
+  next()
+})
+
+// render views
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/sign-up', signUpRouter);
+app.use('/log-in', logInRouter);
+app.use('/log-out',logOutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
