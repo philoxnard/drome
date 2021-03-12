@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next){
-  bcrypt.hash("somePassword", 10, (err, hashedPassword) =>{
+  bcrypt.hash(req.body.password, 10, (err, hashedPassword) =>{
     const user = new User({
       username: req.body.username, 
       password: hashedPassword

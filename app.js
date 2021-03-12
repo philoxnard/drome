@@ -49,11 +49,14 @@ passport.use(
       if (!user) {
         return done(null, false, {message: "Username not found"})
       }
-      bcrypt.compare("somePassword", user.password, (err, res) => {
-        if (res) {
-          return done(null, user)
-        } else {
+      bcrypt.compare(password, user.password, (err, res) => {
+        console.log(password, user.password, res)
+        if (!res) {
+          console.log('fail')
           return done(null, false, {message: "incorrect password"})
+        } else {
+          console.log('sucess')
+          return done(null, user)
         }
       })
     })
