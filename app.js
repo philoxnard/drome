@@ -9,10 +9,11 @@ var LocalStrategy = require("passport-local").Strategy
 var bcrypt = require('bcryptjs')
 var mongoose = require('mongoose')
 var User = require('./schema/UserSchema.js')
+require('dotenv').config()
 
 
 // connect to mongoDb
-const mongoDb = 'mongodb+srv://phil:heck9876@cluster0.z1gnj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const mongoDb = process.env.DB_URI
 mongoose.connect(mongoDb, {useUnifiedTopology: true, useNewUrlParser: true})
 const db = mongoose.connection
 db.on("error", console.error.bind(console, "mongo connection error:"))
