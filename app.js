@@ -50,7 +50,9 @@ passport.use(
         return done(null, false, {message: "Username not found"})
       }
       bcrypt.compare(password, user.password, (err, res) => {
-        console.log(password, user.password, res)
+        console.log('hashed:', user.password)
+        console.log('unhashed: ', password)
+        console.log('result: ', res)
         if (!res) {
           console.log('fail')
           return done(null, false, {message: "incorrect password"})

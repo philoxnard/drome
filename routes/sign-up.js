@@ -11,6 +11,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next){
   bcrypt.hash(req.body.password, 10, (err, hashedPassword) =>{
+    console.log('unhashed: ', req.body.password)
+    console.log('hashed:', hashedPassword)
     const user = new User({
       username: req.body.username, 
       password: hashedPassword
@@ -19,6 +21,7 @@ router.post('/', function(req, res, next){
         return next(err)
       }
     })
+    console.log(bcrypt.compare(req.body.password, hashedPassword))
   })
   res.redirect('/')
 })
