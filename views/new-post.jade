@@ -1,0 +1,14 @@
+extends layout
+extends admin 
+
+block adminContent
+    form(action="", method="POST")
+        label.username Title of new post: 
+        input(type="text", name="title", placeholder="Input your title")
+        br
+        br
+        label.username Content:
+        textarea(type="text", name="content", placeholder="Input witty content here")
+        br
+        br
+        input(type="submit", value="Submit Post")
