@@ -11,6 +11,12 @@ html
           a(href="log-in") Click here to log in
         if currentUser
           a(href="log-out") Click here to log out
+          br
+          if currentUser.isAdmin 
+            a(href="admin") Click here to view your adminstrator page
+          else 
+            a(href="account") Click here to view and edit your account settings
+
       #navbar 
         a(href="birthdays").navlink Birthdays
         a(href="arcade").navlink Arcade

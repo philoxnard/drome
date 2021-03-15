@@ -23,6 +23,8 @@ var usersRouter = require('./routes/users');
 var signUpRouter = require('./routes/sign-up');
 var logInRouter = require('./routes/log-in')
 var logOutRouter = require('./routes/log-out')
+var adminRouter = require('./routes/admin')
+var accountRouter = require('./routes/account')
 
 var app = express();
 
@@ -50,9 +52,6 @@ passport.use(
         return done(null, false, {message: "Username not found"})
       }
       bcrypt.compare(password, user.password, (err, res) => {
-        console.log('hashed:', user.password)
-        console.log('unhashed: ', password)
-        console.log('result: ', res)
         if (!res) {
           console.log('fail')
           return done(null, false, {message: "incorrect password"})
@@ -89,12 +88,16 @@ app.use(function(req, res, next) {
   next()
 })
 
+
+
 // render views
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/log-in', logInRouter);
 app.use('/log-out',logOutRouter);
+app.use('/admin',adminRouter);
+app.use('/account', accountRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

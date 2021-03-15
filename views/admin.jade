@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    if currentUser 
+        if currentUser.isAdmin 
+            h1= title
+            p Welcome to #{title}
+            block adminContent
+        else 
+            p You don't have permission to view this page 
+    else 
+        p You must log on as an adminstrator to view this page
+    
