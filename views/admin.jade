@@ -5,6 +5,8 @@ block content
         if currentUser.isAdmin 
             h1= title
             p Welcome to #{title}
+            #adminNav
+                a(href="admin/new-post").navlink Create a new Blog Post
             block adminContent
         else 
             p You don't have permission to view this page 

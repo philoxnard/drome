@@ -32,6 +32,10 @@ h1 {
   float: right;
 }
 
+#adminNav {
+  padding: 40px;
+}
+
 .navlink {
   background-color: rgb(6, 139, 216);
   color: rgb(0, 0, 0);
