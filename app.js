@@ -9,7 +9,6 @@ var LocalStrategy = require("passport-local").Strategy
 var bcrypt = require('bcryptjs')
 var mongoose = require('mongoose')
 var User = require('./schema/UserSchema.js')
-var BlogPost = require('./schema/BlogPostSchema.js')
 require('dotenv').config()
 
 
