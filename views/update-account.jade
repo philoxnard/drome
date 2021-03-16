@@ -1,0 +1,13 @@
+extends account 
+
+block accountContent 
+    form(action="", method="POST")
+        br
+        p Currently logged in as !{currentUser.username}
+        label.firstName Your first name: 
+        input(type="text", name="firstName", placeholder= "your first name")
+        br
+        label.lastName Your last name:
+        input(type="text", name="lastName", placeholder= "your last name")
+        br
+        input(type="submit", value="Update Account")

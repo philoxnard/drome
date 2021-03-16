@@ -6,7 +6,10 @@ const User = mongoose.model(
     new Schema({
       username: {type: String, required: true},
       password: {type: String, required: true},
-      isAdmin: {type: Boolean, required: true}
+      isAdmin: {type: Boolean, required: true},
+      firstName: {type: String},
+      lastName: {type: String},
+      shoeSize: {type: Number}
     })
   )
 

@@ -3,9 +3,11 @@ extends layout
 block content
     h1= title
     p Welcome to #{title}
-    if posts 
+    if posts     
         each post in posts
             .post 
                 .post-title= post.title 
                 .post-date= post.date 
                 .post-content= post.content
+        if posts.length < 4
+            a(href="all-posts") Click here to see all posts

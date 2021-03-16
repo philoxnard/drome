@@ -3,12 +3,22 @@ var router = express.Router();
 
 var BlogPost = require('../schema/BlogPostSchema.js')
 
+
 /* GET home page. */
+/* Takes the blogposts from database and displays the first three */
 router.get('/', async function(req, res, next) {
-  const posts = await BlogPost.find({})
-  console.log(posts)
+  var posts = await BlogPost.find({})
+  posts = posts.reverse()
+  posts = posts.slice(0, 3)
   res.render('home', { title: 'Home', posts});
 });
+
+router.get('/all-posts', async function(req, res, next) {
+  var posts = await BlogPost.find({})
+  posts = posts.reverse()
+  res.render('home', { title: 'Home', posts});
+});
+
 
 /* GET birthdays page. */
 router.get('/birthdays', function(req, res, next) {

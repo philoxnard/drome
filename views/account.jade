@@ -7,7 +7,8 @@ block content
         else 
             h1= title
             p Welcome to #{title}
-            block adminContent
+            a(href="/account/update-account").navlink Update account info
+            block accountContent
     else 
         p You must log on to view this page
     
