@@ -1,0 +1,12 @@
+extends admin 
+
+block adminContent 
+    br
+    h1 Displaying all account names
+    if userDB     
+        each user in userDB
+            .game-block
+                p Username: !{user.username} 
+                form(action="", method="POST")
+                    input(type="hidden", name="ID", value= user._id)
+                    input(type='submit', value='Remove User')

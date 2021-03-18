@@ -21,7 +21,6 @@ router.get('/all-posts', async function(req, res, next) {
 
 router.post('/', function(req, res, next){
   let blogPostID = req.body.ID
-  console.log(blogPostID)
   BlogPost.findByIdAndDelete(blogPostID, function(err, docs){
     if (err){
       console.log(err)
