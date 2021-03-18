@@ -1,16 +1,13 @@
-extends account 
+extends admin 
 
-block accountContent 
+block adminContent 
     br
-    p Currently logged in as !{currentUser.username}
-    if gameHistory     
-        each game in gameHistory
+    if gameDB     
+        each game in gameDB
             .game-block
-                p= game.organizerName 
-                p= game.dateBooked 
-                p= game.dateGame 
-                p= game.timeGame 
-                p= game.numGame 
-                p= game.numPlayersRentingShoes 
-                p= game.numGames 
+                p Game created by !{game.organizerName} 
+                p Game booked on !{game.dateBooked}
+                p Booked for !{game.dateGame} at !{game.timeGame}
+                p !{game.numGame} games booked
+                p !{game.numPlayers} players, with !{game.numPlayersRentingShoes} renting shoes
             

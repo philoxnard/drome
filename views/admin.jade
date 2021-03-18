@@ -6,7 +6,8 @@ block content
             h1= title
             p Welcome to #{title}
             #adminNav
-                a(href="admin/new-post").navlink Create a new Blog Post
+                a(href="../admin/new-post").navlink Create a new Blog Post
+                a(href="../admin/view-history").navlink View game history
             block adminContent
         else 
             p You don't have permission to view this page 

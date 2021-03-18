@@ -22,11 +22,5 @@ router.post('/update-account', function(req, res, next){
   res.redirect('/')
 })
 
-router.get('/view-history', async function(req, res, next) {
-  var gameHistory = await Game.find({})
-  gameHistory = gameHistory.reverse()
-  console.log(gameHistory)
-  res.render('view-history', { title: 'Account', gameHistory});
-});
 
 module.exports = router;
