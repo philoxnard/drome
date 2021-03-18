@@ -22,5 +22,12 @@ router.post('/update-account', function(req, res, next){
   res.redirect('/')
 })
 
+router.get('/account-history', async function(req, res, next){
+  var gameDB = await Game.find({organizerUsername: res.locals.currentUser.username})
+  gameDB = gameDB.reverse()
+  console.log(gameDB)
+  res.render('account-history', { title: 'Account', gameDB});
+})
+
 
 module.exports = router;
