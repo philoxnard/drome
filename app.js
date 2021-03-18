@@ -25,6 +25,7 @@ var logInRouter = require('./routes/log-in')
 var logOutRouter = require('./routes/log-out')
 var adminRouter = require('./routes/admin')
 var accountRouter = require('./routes/account')
+var bookingGameRouter = require('./routes/booking-game')
 
 var app = express();
 
@@ -86,6 +87,7 @@ app.post(
 // set local object currentUser
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user
+  res.locals.bookingGame = false
   next()
 })
 
@@ -99,6 +101,7 @@ app.use('/log-in', logInRouter);
 app.use('/log-out',logOutRouter);
 app.use('/admin',adminRouter);
 app.use('/account', accountRouter)
+app.use('/book-game', bookingGameRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,16 @@
+extends account 
+
+block accountContent 
+    br
+    p Currently logged in as !{currentUser.username}
+    if gameHistory     
+        each game in gameHistory
+            .game-block
+                p= game.organizerName 
+                p= game.dateBooked 
+                p= game.dateGame 
+                p= game.timeGame 
+                p= game.numGame 
+                p= game.numPlayersRentingShoes 
+                p= game.numGames 
+            

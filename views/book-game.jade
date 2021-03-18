@@ -1,0 +1,33 @@
+extends layout 
+
+block content
+    h1 Book your game
+    form(action="", method="POST")
+        label What is your name? 
+        if !currentUser
+            input(type="text", name="organizerName", placeholder="Input your name")
+        if currentUser 
+            input(type="text", name="organizerName", value=currentUser.firstName)
+        br 
+        br
+        label How many players are in your party? 
+        input(type="text", name="numPlayers", placeholder="How many players")
+        br 
+        br
+        label How many players will need to rent shoes? 
+        input(type="text", name="numPlayersRentingShoes", placeholder="Don't want anyone slipping")
+        br 
+        br
+        label How many games do you plan on playing? 
+        input(type="text", name="numGames", placeholder="You can't just play one!")
+        br
+        br 
+        label What day would you like to play? 
+        input(type="date", name="date")
+        br
+        br 
+        label And at what time? 
+        input(type="time", name="time")
+        br
+        br 
+        input(type="submit", value="Book Game")

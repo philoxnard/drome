@@ -16,7 +16,6 @@ html
             a(href="/admin") Click here to view your adminstrator page
           else 
             a(href="/account") Click here to view and edit your account settings
-
       #navbar 
         a(href="/birthdays").navlink Birthdays
         a(href="/arcade").navlink Arcade
@@ -26,6 +25,10 @@ html
       #header
         a(href="/").title Acton Bowladrome & Arcade
         p.undertitle Come Play With Us!
+      if !bookingGame
+        #book-a-game 
+          a(href="/book-game").navlink Book a Game
+
   body
     #content
       block content
