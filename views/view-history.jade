@@ -5,9 +5,12 @@ block adminContent
     if gameDB     
         each game in gameDB
             .game-block
+                if game.organizerUsername 
+                    p Account username: !{game.organizerUsername}
                 p Game created by !{game.organizerName} 
                 p Game booked on !{game.dateBooked}
                 p Booked for !{game.dateGame} at !{game.timeGame}
                 p !{game.numGame} games booked
                 p !{game.numPlayers} players, with !{game.numPlayersRentingShoes} renting shoes
+
             

@@ -5,6 +5,7 @@ const Game = mongoose.model(
     "Game",
     new Schema({
       organizerName: {type: String, required: true},
+      organizerUsername: {type: String},
       dateBooked: {type: Date, required: true},
       dateGame: {type: Date, required: true},
       timeGame: {type: String, required: true},

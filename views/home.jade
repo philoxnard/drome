@@ -9,5 +9,11 @@ block content
                 .post-title= post.title 
                 .post-date= post.date 
                 .post-content= post.content
+                if currentUser 
+                    if currentUser.isAdmin 
+                        br
+                        form(action="", method="POST")
+                            input(type="hidden", name="ID", value= post._id)
+                            input(type='submit', value='Remove Post')
         if posts.length < 4
             a(href="all-posts") Click here to see all posts

@@ -19,6 +19,30 @@ router.get('/all-posts', async function(req, res, next) {
   res.render('home', { title: 'Home', posts});
 });
 
+router.post('/', function(req, res, next){
+  let blogPostID = req.body.ID
+  console.log(blogPostID)
+  BlogPost.findByIdAndDelete(blogPostID, function(err, docs){
+    if (err){
+      console.log(err)
+    } else{
+      console.log("Deleted: ", docs)
+    }
+  })
+  res.redirect('/')
+})
+
+router.post('/all-posts', function(req, res, next){
+  let blogPostID = req.body.ID
+  BlogPost.findByIdAndDelete(blogPostID, function(err, docs){
+    if (err){
+      console.log(err)
+    } else{
+      console.log("Deleted: ", docs)
+    }
+  })
+  res.redirect('/all-posts')
+})
 
 /* GET birthdays page. */
 router.get('/birthdays', function(req, res, next) {

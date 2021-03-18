@@ -12,21 +12,21 @@ router.get('/', async function(req, res, next) {
 });
 
 router.post('/', function(req, res, next){
-        const game = new Game({
-        organizerName: req.body.organizerName, 
-        dateBooked: new Date(),
-        dateGame: req.body.date,
-        timeGame: req.body.time,
-        numPlayers: req.body.numPlayers,
-        numPlayersRentingShoes: req.body.numPlayersRentingShoes,
-        numGames: req.body.numGames
-    }).save(err => {
-    if (err) {
-        return next(err)
-    }
+    const game = new Game({
+    organizerName: req.body.organizerName, 
+    dateBooked: new Date(),
+    dateGame: req.body.date,
+    timeGame: req.body.time,
+    numPlayers: req.body.numPlayers,
+    numPlayersRentingShoes: req.body.numPlayersRentingShoes,
+    numGames: req.body.numGames
     })
+    if (res.locals.currentUser) {
+        game.organizerUsername = res.locals.currentUser.username
+    }
+    game.save()
     res.redirect('/')
-  })
+})
   
 
 module.exports = router;
